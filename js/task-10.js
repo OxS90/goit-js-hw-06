@@ -13,7 +13,13 @@ function createBoxes(amount) {
 		boxesDiv.appendChild(box);
 	}
 }
-
+function destroyBoxes(amount) {
+	const boxes = boxesDiv.querySelectorAll("div");
+	const removeCount = Math.min(amount, boxes.length);
+	for (let i = boxes.length - 1; i >= boxes.length - removeCount; i--) {
+		boxesDiv.removeChild(boxes[i]);
+	}
+}
 const createButton = document.querySelector("[data-create]");
 const destroyButton = document.querySelector("[data-destroy]");
 createButton.addEventListener("click", () => {
@@ -24,8 +30,5 @@ createButton.addEventListener("click", () => {
 destroyButton.addEventListener("click", () => {
 	const input = document.querySelector("input");
 	const inputVal = parseInt(input.value);
-	const boxes = boxesDiv.querySelectorAll("div");
-	for (let i = 0; (i < inputVal) & (i < boxes.length); i++) {
-		boxesDiv.removeChild(boxes[i]);
-	}
+	destroyBoxes(inputVal);
 });
